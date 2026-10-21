@@ -74,6 +74,8 @@
       --divider: #ded3c7;
       --modal-overlay: rgba(26, 22, 19, 0.65);
       --modal-bg: #ffffff;
+
+      --pink-primary: #C74765
     }
 
     /* Tema Escuro Luxo (Dark Bronze & Gold) */
@@ -364,6 +366,14 @@
       background: var(--gold-primary);
     }
 
+    .cine-craft:hover::before {
+      background: var(--pink-primary);
+    }
+
+    .cine-craft:hover {
+      border-color: var(--pink-primary);
+    }
+
     .link-card:active {
       transform: scale(0.985);
     }
@@ -373,7 +383,7 @@
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      object-fit: cover;
+      object-fit: contain;
       flex-shrink: 0;
       border: 1px solid var(--card-border);
       background: rgba(0, 0, 0, 0.04);
@@ -850,9 +860,9 @@
         -->
 
         <!-- Cine Craft - Outubro Rosa -->
-        <a href="https://banlek.com/album/29356b" target="_blank" rel="noopener" class="link-card">
+        <a href="https://banlek.com/album/29356b" target="_blank" rel="noopener" class="link-card cine-craft">
           <img 
-            src="https://d2hk32cswy6zx7.cloudfront.net/cbfce6731f15197e961665ef371beab4/v2_6331e628-8fcb-4071-ad0a-8e9c11feb501.jpg" 
+            src="../assets/cine-craft.png" 
             alt="Cine Craft - Outubro Rosa" 
             class="card-thumb" 
             onerror="this.onerror=null; this.src='../assets/logo-doisz.png';"
@@ -884,7 +894,7 @@
               <span class="card-title">@doiszfotografias</span>
               <span class="card-badge">Instagram</span>
             </div>
-            <span class="card-subtitle">Ensaios fotográficos sociais, femininos, casais e produções</span>
+            <span class="card-subtitle">Ensaios fotográficos sociais, casais e produções</span>
           </div>
           <div class="card-arrow">
             <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
@@ -906,7 +916,7 @@
               <span class="card-title">WhatsApp Oficial</span>
               <span class="card-badge badge-whatsapp">(41) 99580-2399</span>
             </div>
-            <span class="card-subtitle">Converse conosco para agendamentos de ensaios ou coberturas</span>
+            <span class="card-subtitle">Entre em contato conosco</span>
           </div>
           <div class="card-arrow">
             <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
