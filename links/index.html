@@ -374,6 +374,18 @@
       border-color: var(--pink-primary);
     }
 
+    .cine-craft::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--pink-primary);
+      border-radius: inherit;
+      box-shadow: 0 0 14px rgba(199, 71, 101, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      animation: cineCraftPulse 2s ease-in-out infinite;
+    }
+
     .link-card:active {
       transform: scale(0.985);
     }
@@ -788,6 +800,10 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes cineCraftPulse {
+      50% { opacity: 0.8; }
+    }
+
     .link-card {
       animation: fadeIn 0.4s ease backwards;
     }
@@ -797,6 +813,13 @@
     .link-card:nth-child(3) { animation-delay: 0.15s; }
     .link-card:nth-child(4) { animation-delay: 0.2s; }
     .link-card:nth-child(5) { animation-delay: 0.25s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cine-craft::after {
+        animation: none;
+        opacity: 0.55;
+      }
+    }
   </style>
 </head>
 <body>
