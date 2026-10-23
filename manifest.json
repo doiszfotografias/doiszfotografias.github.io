@@ -1,0 +1,26 @@
+{
+  "id": "/links/",
+  "name": "Dois Z Fotografias",
+  "short_name": "Dois Z",
+  "description": "Galerias oficiais de eventos, ensaios fotográficos e contatos da Dois Z Fotografias.",
+  "lang": "pt-BR",
+  "start_url": "/links/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f2ef",
+  "theme_color": "#f7f2ef",
+  "icons": [
+    {
+      "src": "/assets/pwa-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
