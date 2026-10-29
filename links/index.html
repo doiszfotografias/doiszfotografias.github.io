@@ -824,6 +824,15 @@
       }
     }
   </style>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-THW66MFXLY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-THW66MFXLY');
+  </script>
 </head>
 <body>
 
@@ -1168,6 +1177,44 @@
         });
       });
     }
+  </script>
+
+  <!-- GA4: Rastreamento de origem (UTM) e cliques nos cards -->
+  <script>
+    (function () {
+      // ── 1. Detecta e registra a origem do visitante ──────────────────────
+      const params = new URLSearchParams(window.location.search);
+      const utmSource   = params.get('utm_source')   || '(direct)';
+      const utmMedium   = params.get('utm_medium')   || '(none)';
+      const utmCampaign = params.get('utm_campaign') || '(none)';
+      const utmContent  = params.get('utm_content')  || '(none)';
+
+      // Evento customizado: qual origem trouxe o usuário à página /links
+      gtag('event', 'page_origin', {
+        event_category: 'origem',
+        utm_source:   utmSource,
+        utm_medium:   utmMedium,
+        utm_campaign: utmCampaign,
+        utm_content:  utmContent,
+        referrer:     document.referrer || '(none)'
+      });
+
+      // ── 2. Rastreia clique em cada card ───────────────────────────────────
+      document.querySelectorAll('a.link-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          const title = card.querySelector('.card-title');
+          const label = title ? title.textContent.trim() : card.getAttribute('href');
+          gtag('event', 'link_click', {
+            event_category: 'links_page',
+            event_label:    label,
+            link_url:       card.getAttribute('href'),
+            utm_source:     utmSource,
+            utm_medium:     utmMedium,
+            utm_campaign:   utmCampaign
+          });
+        });
+      });
+    })();
   </script>
 </body>
 </html>
