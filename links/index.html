@@ -1184,22 +1184,46 @@
     (function () {
       // ── 1. Detecta e registra a origem do visitante ──────────────────────
       const params = new URLSearchParams(window.location.search);
+
       const utmSource   = params.get('utm_source')   || '(direct)';
       const utmMedium   = params.get('utm_medium')   || '(none)';
       const utmCampaign = params.get('utm_campaign') || '(none)';
       const utmContent  = params.get('utm_content')  || '(none)';
+      const fbclid      = params.get('fbclid')       || null;
 
-      // Evento customizado: qual origem trouxe o usuário à página /links
-      gtag('event', 'page_origin', {
-        event_category: 'origem',
-        utm_source:   utmSource,
-        utm_medium:   utmMedium,
-        utm_campaign: utmCampaign,
-        utm_content:  utmContent,
-        referrer:     document.referrer || '(none)'
+      // Normaliza: Instagram usa utm_source=ig → exibir como "instagram"
+      const sourceLabel = utmSource === 'ig' ? 'instagram' : utmSource;
+
+      // Detecta o canal de origem
+      let canal = 'direto';
+      if (utmContent === 'link_in_bio')          canal = 'instagram_bio';
+      else if (utmMedium === 'qrcode' && utmSource === 'cartao_visita') canal = 'qrcode_cartao';
+      else if (utmMedium === 'qrcode' && utmSource === 'celular')       canal = 'qrcode_celular';
+      else if (utmMedium === 'qrcode')            canal = 'qrcode';
+      else if (utmMedium === 'social')            canal = 'social';
+      else if (utmMedium === 'mensagem')          canal = 'whatsapp';
+      else if (fbclid)                            canal = 'instagram_ad';
+
+      // ── 2. Passa UTMs corretos para o GA4 (incluindo fbclid) ──────────────
+      gtag('config', 'G-THW66MFXLY', {
+        'custom_map': {
+          'dimension1': 'canal_origem',
+          'dimension2': 'utm_content_custom'
+        }
       });
 
-      // ── 2. Rastreia clique em cada card ───────────────────────────────────
+      // Evento customizado: origem do visitante na página /links
+      gtag('event', 'page_origin', {
+        canal_origem:       canal,
+        utm_source:         sourceLabel,
+        utm_medium:         utmMedium,
+        utm_campaign:       utmCampaign,
+        utm_content_custom: utmContent,
+        fbclid_presente:    fbclid ? 'sim' : 'nao',
+        referrer:           document.referrer || '(none)'
+      });
+
+      // ── 3. Rastreia clique em cada card ───────────────────────────────────
       document.querySelectorAll('a.link-card').forEach(function (card) {
         card.addEventListener('click', function () {
           const title = card.querySelector('.card-title');
@@ -1208,7 +1232,8 @@
             event_category: 'links_page',
             event_label:    label,
             link_url:       card.getAttribute('href'),
-            utm_source:     utmSource,
+            canal_origem:   canal,
+            utm_source:     sourceLabel,
             utm_medium:     utmMedium,
             utm_campaign:   utmCampaign
           });
