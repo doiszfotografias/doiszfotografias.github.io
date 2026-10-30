@@ -377,16 +377,25 @@
       border-color: var(--pink-primary);
     }
 
-    .cine-craft::after {
+    /* Masterclass — borda pulsante rosé */
+    .masterclass:hover::before {
+      background: rgba(166, 139, 138, 0.18);
+    }
+
+    .masterclass:hover {
+      border-color: rgb(166, 139, 138);
+    }
+
+    .masterclass::after {
       content: '';
       position: absolute;
       inset: 0;
-      border: 1px solid var(--pink-primary);
+      border: 1.5px solid rgb(166, 139, 138);
       border-radius: inherit;
-      box-shadow: 0 0 14px rgba(199, 71, 101, 0.28);
+      box-shadow: 0 0 16px rgba(166, 139, 138, 0.45);
       opacity: 0;
       pointer-events: none;
-      animation: cineCraftPulse 2s ease-in-out infinite;
+      animation: masterclassPulse 2s ease-in-out infinite;
     }
 
     .link-card:active {
@@ -803,8 +812,9 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes cineCraftPulse {
-      50% { opacity: 0.8; }
+    @keyframes masterclassPulse {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.85; }
     }
 
     .link-card {
@@ -818,7 +828,7 @@
     .link-card:nth-child(5) { animation-delay: 0.25s; }
 
     @media (prefers-reduced-motion: reduce) {
-      .cine-craft::after {
+      .masterclass::after {
         animation: none;
         opacity: 0.55;
       }
@@ -894,6 +904,26 @@
         </a>
         -->
 
+        <!-- 1ª Masterclass - Preenchimento Labial e Anestesia -->
+        <a href="https://banlek.com/album/29eca4" target="_blank" rel="noopener" class="link-card masterclass">
+          <img
+            src="../assets/masterclass-labial.jpg"
+            alt="1ª Masterclass - Preenchimento Labial e Anestesia"
+            class="card-thumb"
+            onerror="this.onerror=null; this.src='../assets/logo-doisz.png';"
+          >
+          <div class="card-content">
+            <div class="card-header-row">
+              <span class="card-title">1ª Masterclass </span>
+              <span class="card-badge" style="background:rgba(166,139,138,0.15);color:rgb(140,110,109);border-color:rgba(166,139,138,0.35);">Em breve</span>
+            </div>
+            <span class="card-subtitle">Clínica Dra. Géssica Thomas</span>
+          </div>
+          <div class="card-arrow">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+          </div>
+        </a>
+
         <!-- Cine Craft - Outubro Rosa -->
         <a href="https://banlek.com/album/29356b" target="_blank" rel="noopener" class="link-card cine-craft">
           <img 
@@ -907,7 +937,7 @@
               <span class="card-title">Cine Craft - Outubro Rosa</span>
               <span class="card-badge badge-gold">Álbum de Fotos</span>
             </div>
-            <span class="card-subtitle">Cinépolis Jockey Plaza Shopping • Banlek</span>
+            <span class="card-subtitle">Cinépolis Jockey Plaza Shopping</span>
           </div>
           <div class="card-arrow">
             <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
